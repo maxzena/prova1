@@ -11,7 +11,7 @@ public class blackjack123 {
         int puntata = 0;
         int sommaGiocatore = 0;
 
-        System.out.println("Ciao benvenuto al gioco del blackjack, vuoi giocare? (s/n)");
+        System.out.println("Ciao benvenuto al gioco del blackjack, vuoi giocare?? (s/n)");
         String risposta = scanner.nextLine();
 
         switch (risposta) {
@@ -28,8 +28,8 @@ public class blackjack123 {
 
         while (turno) {
 
-            int carta1 = pescacarta();
-            int carta2 = pescacarta();
+            int carta1 = 10;
+            int carta2 = 10;
             int carta1Dealer = pescacarta();
             int carta2Dealer = pescacarta();
             int contacarte = 2;
@@ -37,7 +37,7 @@ public class blackjack123 {
             System.out.println(" hai " + saldo + " fiches . Quanto vuoi puntare? ");
             puntata = scanner.nextInt();
             scanner.nextLine();
-
+            boolean keepasking = true;
             if (puntata <= 0 || puntata > saldo) {
                 System.out.println("Puntata non valida");
             } else {
@@ -54,8 +54,61 @@ public class blackjack123 {
 
                     sommaGiocatore = carta1 + carta2;
                     int sommaDealer = carta1Dealer + carta2Dealer;
+                    if(carta1==carta2){
+                      System.out.println("vuoi splittare le due carte? ,   si/no");
+                      String split=scanner.nextLine();
+                      if(split=="si"){
+                        int somma1=carta1;
+                        int somma2=carta2;
+                        int carta1split=pescacarta();
+                        int carta2split=pescacarta();
+                        somma1+=carta1split;
+                        somma2+=carta2split;
+                        System.out.println("il primo mazzo è composto da: " + carta1 + carta1split);
+                        System.out.println("ora usiamo il primo mazzo");
+                        stampacartegiocatore(carta1, carta1split);
+                          while (keepasking) {
 
-                    boolean keepasking = true;
+                              System.out.println("Vuoi pescare un'altra carta? (s/n)");
+                              String risposta2 = scanner.nextLine();
+
+                              switch (risposta2) {
+
+                                  case "s":
+                                      int carta3 = pescacarta();
+                                      sommaGiocatore += carta3;
+                                      contacarte++;
+
+                                      System.out.println("Hai pescato: " + carta3);
+                                      System.out.println("La tua mano ora vale: " + sommaGiocatore);
+
+                                      if (sommaGiocatore > 21) {
+                                          System.out.println("Hai sballato! Il dealer vince.");
+                                          saldo -= puntata;
+                                          keepasking = false;
+                                          if (saldo <= 0) {
+                                              System.out.println("Hai finito i soldi! Il gioco è finito.");
+                                              turno = false;
+                                          }
+                                      }
+                                      break;
+
+                                  case "n":
+                                      System.out.println("Il dealer pesca la sua seconda carta... " + carta2Dealer);
+
+                                      while (sommaDealer <= 17 && sommaDealer <= 21) {
+                                          int carta3Dealer = pescacarta();
+                                          sommaDealer += carta3Dealer;
+                                          System.out.println("Il dealer pesca: " + carta3Dealer +
+                                                  " la mano del dealer ora vale: " + sommaDealer);
+                                      }
+
+
+                      }
+
+
+                    }
+
 
                     while (keepasking) {
 
@@ -141,7 +194,8 @@ public class blackjack123 {
             }
         }
     }
-
+        }
+    }
     public static int pescacarta() {
         return random.nextInt(10) + 1;
     }
