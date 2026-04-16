@@ -10,7 +10,7 @@ public class blackjack123 {
         int saldo = 67000;
         int puntata = 0;
         int sommaGiocatore = 0;
-
+        //test
         System.out.println("Ciao benvenuto al gioco del blackjack, vuoi giocare? (s/n)");
         String risposta = scanner.nextLine();
 
