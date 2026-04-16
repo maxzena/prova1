@@ -55,9 +55,9 @@ public class blackjack123 {
                     sommaGiocatore = carta1 + carta2;
                     int sommaDealer = carta1Dealer + carta2Dealer;
                     if(carta1==carta2){
-                      System.out.println("vuoi splittare le due carte? ,   si/no");
+                      System.out.println("vuoi splittare le due carte? ,   s/n");
                       String split=scanner.nextLine();
-                      if(split=="si"){
+                      if(split.equals("s")){
                         int somma1=carta1;
                         int somma2=carta2;
                         int carta1split=pescacarta();
@@ -76,7 +76,7 @@ public class blackjack123 {
 
                                   case "s":
                                       int carta3 = pescacarta();
-                                      sommaGiocatore += carta3;
+                                      somma1 += carta3;
                                       contacarte++;
 
                                       System.out.println("Hai pescato: " + carta3);
@@ -108,8 +108,8 @@ public class blackjack123 {
 
 
                     }
-
-
+                    }
+                    else{
                     while (keepasking) {
 
                         System.out.println("Vuoi pescare un'altra carta? (s/n)");
